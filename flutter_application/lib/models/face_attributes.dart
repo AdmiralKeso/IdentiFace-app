@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 
 enum FaceShape { oval, round, square, rectangular, heart, diamond, oblong }
 
-enum SkinTone { fair, light, medium, olive, tan, dark, deep }
-
 enum FrecklesDensity { none, light, moderate, heavy }
 
 enum MolesPresence { none, one, multiple }
@@ -102,7 +100,7 @@ enum ScarLocation { none, forehead, cheek, chin, nose, neck }
 
 enum TattooLocation { none, face, neck }
 
-enum AgeRange { teens, twenties, thirties, forties, fifties, sixties, seventies }
+enum AgeRange { child, teen, adult, senior }
 
 enum Dimples { none, left, right, both }
 
@@ -111,7 +109,6 @@ enum Dimples { none, left, right, both }
 class FaceAttributes {
   // Face & Skin
   final FaceShape? faceShape;
-  final SkinTone? skinTone;
   final Color? skinColor;
   final FrecklesDensity? freckles;
   final MolesPresence? moles;
@@ -184,7 +181,6 @@ class FaceAttributes {
 
   const FaceAttributes({
     this.faceShape,
-    this.skinTone,
     this.skinColor,
     this.freckles,
     this.moles,
@@ -238,7 +234,6 @@ class FaceAttributes {
 
   FaceAttributes copyWith({
     FaceShape? faceShape,
-    SkinTone? skinTone,
     Color? skinColor,
     FrecklesDensity? freckles,
     MolesPresence? moles,
@@ -291,7 +286,6 @@ class FaceAttributes {
   }) {
     return FaceAttributes(
       faceShape: faceShape ?? this.faceShape,
-      skinTone: skinTone ?? this.skinTone,
       skinColor: skinColor ?? this.skinColor,
       freckles: freckles ?? this.freckles,
       moles: moles ?? this.moles,

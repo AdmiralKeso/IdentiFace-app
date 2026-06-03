@@ -43,9 +43,7 @@ class HomeScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // navigate to feature selection
-                  },
+                  onPressed: () => Navigator.pushNamed(context, '/select'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF1A73E8),
                     foregroundColor: Colors.white,

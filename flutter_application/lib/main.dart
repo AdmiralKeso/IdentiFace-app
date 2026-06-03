@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
+import 'screens/selection_screen.dart';
 
 void main() {
   runApp(const IdentiFaceApp());
@@ -29,6 +30,7 @@ class IdentiFaceApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
+        '/select': (context) => const SelectionScreen(),
       },
     );
   }
