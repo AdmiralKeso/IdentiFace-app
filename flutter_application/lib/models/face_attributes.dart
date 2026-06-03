@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 // --- Face & Skin ---
 
-enum FaceShape { oval, round, square, rectangular, heart, diamond, oblong }
-
 enum FrecklesDensity { none, light, moderate, heavy }
 
 enum MolesPresence { none, one, multiple }
@@ -107,8 +105,14 @@ enum Dimples { none, left, right, both }
 // --- Main model ---
 
 class FaceAttributes {
-  // Face & Skin
-  final FaceShape? faceShape;
+  // Face dimensions (sliders, all 0.0–1.0)
+  final double faceWidth;
+  final double faceHeight;
+  final double jawWidth;
+  final double foreheadWidth;
+  final double chinPointedness;
+
+  // Skin
   final Color? skinColor;
   final FrecklesDensity? freckles;
   final MolesPresence? moles;
@@ -180,7 +184,11 @@ class FaceAttributes {
   final Dimples? dimples;
 
   const FaceAttributes({
-    this.faceShape,
+    this.faceWidth = 0.5,
+    this.faceHeight = 0.5,
+    this.jawWidth = 0.5,
+    this.foreheadWidth = 0.5,
+    this.chinPointedness = 0.3,
     this.skinColor,
     this.freckles,
     this.moles,
@@ -233,7 +241,11 @@ class FaceAttributes {
   });
 
   FaceAttributes copyWith({
-    FaceShape? faceShape,
+    double? faceWidth,
+    double? faceHeight,
+    double? jawWidth,
+    double? foreheadWidth,
+    double? chinPointedness,
     Color? skinColor,
     FrecklesDensity? freckles,
     MolesPresence? moles,
@@ -285,7 +297,11 @@ class FaceAttributes {
     Dimples? dimples,
   }) {
     return FaceAttributes(
-      faceShape: faceShape ?? this.faceShape,
+      faceWidth: faceWidth ?? this.faceWidth,
+      faceHeight: faceHeight ?? this.faceHeight,
+      jawWidth: jawWidth ?? this.jawWidth,
+      foreheadWidth: foreheadWidth ?? this.foreheadWidth,
+      chinPointedness: chinPointedness ?? this.chinPointedness,
       skinColor: skinColor ?? this.skinColor,
       freckles: freckles ?? this.freckles,
       moles: moles ?? this.moles,

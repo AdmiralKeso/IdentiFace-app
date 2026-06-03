@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/face_attributes.dart';
 import '../widgets/color_picker.dart';
+import '../widgets/face_sketch.dart';
 
 class SelectionScreen extends StatefulWidget {
   const SelectionScreen({super.key});
@@ -87,6 +88,14 @@ class _SelectionScreenState extends State<SelectionScreen> {
               ],
             ),
           ),
+          Container(
+            height: 160,
+            color: const Color(0xFF141414),
+            child: Center(
+              child: FaceSketchWidget(attrs: _attrs),
+            ),
+          ),
+          const Divider(height: 1, color: Colors.white12),
           Expanded(
             child: PageView(
               controller: _pageController,
@@ -146,8 +155,16 @@ class _SelectionScreenState extends State<SelectionScreen> {
   Widget _buildPage0() => _scroll([
         _chips('Age Range', AgeRange.values, _attrs.ageRange,
             (v) => _update(_attrs.copyWith(ageRange: v))),
-        _chips('Face Shape', FaceShape.values, _attrs.faceShape,
-            (v) => _update(_attrs.copyWith(faceShape: v))),
+        _slider('Face Width', 'Narrow', 'Wide', _attrs.faceWidth,
+            (v) => _update(_attrs.copyWith(faceWidth: v))),
+        _slider('Face Height', 'Short', 'Tall', _attrs.faceHeight,
+            (v) => _update(_attrs.copyWith(faceHeight: v))),
+        _slider('Forehead Width', 'Narrow', 'Wide', _attrs.foreheadWidth,
+            (v) => _update(_attrs.copyWith(foreheadWidth: v))),
+        _slider('Jaw Width', 'Narrow', 'Wide', _attrs.jawWidth,
+            (v) => _update(_attrs.copyWith(jawWidth: v))),
+        _slider('Chin Shape', 'Rounded', 'Pointed', _attrs.chinPointedness,
+            (v) => _update(_attrs.copyWith(chinPointedness: v))),
         _colorField('Skin Color', _attrs.skinColor,
             (c) => _update(_attrs.copyWith(skinColor: c))),
       ]);
@@ -445,6 +462,64 @@ class _SelectionScreenState extends State<SelectionScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _slider(
+    String label,
+    String minLabel,
+    String maxLabel,
+    double value,
+    void Function(double) onChanged,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              label.toUpperCase(),
+              style: const TextStyle(
+                color: Colors.white38,
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              '${(value * 100).round()}%',
+              style: const TextStyle(color: Colors.white38, fontSize: 11),
+            ),
+          ],
+        ),
+        SliderTheme(
+          data: SliderThemeData(
+            activeTrackColor: const Color(0xFF1A73E8),
+            inactiveTrackColor: Colors.white12,
+            thumbColor: const Color(0xFF1A73E8),
+            overlayColor: const Color(0xFF1A73E8).withValues(alpha: 0.15),
+            trackHeight: 3,
+            thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+          ),
+          child: Slider(
+            value: value,
+            min: 0.0,
+            max: 1.0,
+            onChanged: onChanged,
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(minLabel,
+                style: const TextStyle(color: Colors.white24, fontSize: 11)),
+            Text(maxLabel,
+                style: const TextStyle(color: Colors.white24, fontSize: 11)),
+          ],
+        ),
+        const SizedBox(height: 20),
+      ],
     );
   }
 
