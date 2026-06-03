@@ -88,31 +88,42 @@ class _SelectionScreenState extends State<SelectionScreen> {
               ],
             ),
           ),
-          Container(
-            height: 160,
-            color: const Color(0xFF141414),
-            child: Center(
-              child: FaceSketchWidget(attrs: _attrs),
-            ),
-          ),
-          const Divider(height: 1, color: Colors.white12),
           Expanded(
-            child: PageView(
-              controller: _pageController,
-              physics: const NeverScrollableScrollPhysics(),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildPage0(),
-                _buildPage1(),
-                _buildPage2(),
-                _buildPage3(),
-                _buildPage4(),
-                _buildPage5(),
-                _buildPage6(),
-                _buildPage7(),
-                _buildPage8(),
-                _buildPage9(),
-                _buildPage10(),
-                _buildPage11(),
+                // Left half — feature chips/sliders
+                Expanded(
+                  child: PageView(
+                    controller: _pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      _buildPage0(),
+                      _buildPage1(),
+                      _buildPage2(),
+                      _buildPage3(),
+                      _buildPage4(),
+                      _buildPage5(),
+                      _buildPage6(),
+                      _buildPage7(),
+                      _buildPage8(),
+                      _buildPage9(),
+                      _buildPage10(),
+                      _buildPage11(),
+                    ],
+                  ),
+                ),
+                // Divider
+                const VerticalDivider(width: 1, color: Colors.white12),
+                // Right half — live face sketch
+                Expanded(
+                  child: Container(
+                    color: const Color(0xFF141414),
+                    child: Center(
+                      child: FaceSketchWidget(attrs: _attrs),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
